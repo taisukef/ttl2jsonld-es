@@ -1,10 +1,10 @@
 # @frogcat/ttl2jsonld
 
-Turtle to JSON-LD converter for node.js and browser, no library dependencies.
+Turtle to JSON-LD converter ES module for Node.js, Deno and browser, no library dependencies.
 
 ## Demo
 
-Online demo is available [here](https://frogcat.github.io/ttl2jsonld/demo/).
+Online demo is available [here](https://taisukef.github.io/ttl2jsonld-es/demo/).
 
 With this converter, you can obtain `Output JSON-LD` from `Input Turtle`, as shown in [JSON-LD 1.0 Specification](https://www.w3.org/TR/json-ld/#turtle) .
 
@@ -33,23 +33,39 @@ With this converter, you can obtain `Output JSON-LD` from `Input Turtle`, as sho
 }
 ```
 
-## Install
 
-### node.js
+## Usage
+
+### Deno and browser
+
+This converter is exported to `ttl2jsonld` global object. Call `ttl2jsonld.parse(ttl)` to perform conversion.
+
+```example.html
+<script type="module">
+import { Turtle } from "https://taisukef.github.io/ttl2jsonld-es/Turtle.js";
+
+const ttl = `@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+
+<http://manu.sporny.org/about#manu> a foaf:Person;
+  foaf:name "Manu Sporny";
+  foaf:homepage <http://manu.sporny.org/> .
+`;
+
+const jsonld = Turtle.parse(ttl);
+
+console.log(JSON.stringify(jsonld, null, 2));
+</script>
+
+```
+
+
+### Node.js
+
+Install
 
 ```a.sh
 $ npm install @frogcat/ttl2jsonld
 ```
-
-### browser
-
-```a.html
-<script src="https://frogcat.github.io/ttl2jsonld/ttl2jsonld.js"></script>
-```
-
-## Usage
-
-### node.js
 
 You can write your own code.
 
@@ -78,33 +94,9 @@ or
 $ cat {input_turtle} | ttl2jsonld > {output_jsonld}
 ```
 
-### browser
-
-This converter is exported to `ttl2jsonld` global object. Call `ttl2jsonld.parse(ttl)` to perform conversion.
-
-```example.html
-<!-- include ttl2jsonld.js -->
-<script src="https://frogcat.github.io/ttl2jsonld/ttl2jsonld.js"></script>
-
-<!-- run script -->
-<script>
-const ttl = `@prefix foaf: <http://xmlns.com/foaf/0.1/> .
-
-<http://manu.sporny.org/about#manu> a foaf:Person;
-  foaf:name "Manu Sporny";
-  foaf:homepage <http://manu.sporny.org/> .
-`;
-
-const jsonld = ttl2jsonld.parse(ttl);
-
-console.log(JSON.stringify(jsonld,null,2));
-</script>
-
-```
-
 ## API
 
-Given `turtle_string`, `ttl2jsonld.parse` returns JSON Object.
+Given `turtle_string`, `ttl2jsonld.parse`(`Turtle.parse`) returns JSON Object.
 
 ```a.js
 var json_object = ttl2jsonld.parse(turtle_string);

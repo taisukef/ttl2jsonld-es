@@ -4,7 +4,6 @@
 <head>
   <meta charset="UTF-8">
   <title>@frogcat/ttl2jsonld</title>
-  <script src="../ttl2jsonld.js"></script>
   <style>
     body>div {
       max-width: 800px;
@@ -41,6 +40,8 @@
     <pre id="output">Click 'convert' to run</pre>
   </div>
   <script type="module">
+    import { Turtle } from "../Turtle.js";
+    
     input.value = `@prefix foaf: <http://xmlns.com/foaf/0.1/> .
 
 <http://manu.sporny.org/about#manu> a foaf:Person;
@@ -50,7 +51,7 @@
     convert.onclick = () => {
       try {
         const t = input.value;
-        const j = ttl2jsonld.parse(t);
+        const j = Turtle.parse(t);
         output.textContent = JSON.stringify(j, null, 2);
       } catch (e) {
         console.log(e);
