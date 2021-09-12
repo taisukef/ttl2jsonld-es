@@ -13,6 +13,7 @@
   "scripts": {
     "test": "mocha",
     "build": "pegjs -o ttl2jsonld.js --format umd --export-var ttl2jsonld spec/ttl2jsonld.pegjs",
+    "build-es": "pegjs -o ttl2jsonld-es.js --format globals --export-var ttl2jsonld spec/ttl2jsonld.pegjs; sed -e 's/\\})(this);/\\})(globalThis);\\n\\nconst Turtle = globalThis.ttl2jsonld;\\nexport \\{ Turtle \\};/' ./ttl2jsonld-es.js > ./Turtle.js; rm ./ttl2jsonld-es.js",
     "spec-turtle": "rdf-test-suite spec/parser.js https://w3c.github.io/rdf-tests/turtle/manifest.ttl -c .rdf-test-suite-cache/"
   },
   "repository": {

@@ -117,7 +117,7 @@ var json_object = ttl2jsonld.parse(turtle_string, {
 
 - Build with [PEG.js](https://pegjs.org/).
 - Main code is `spec/ttl2jsonld.pegjs`.
-- When you edit code, run `npm run build` to generate `ttl2jsonld.js`.
+- When you edit code, run `npm run build` to generate `ttl2jsonld.js`, run `npm run build-es` to generate `Turtle.js`.
 
 ### testing
 
