@@ -4,7 +4,6 @@
 <head>
   <meta charset="UTF-8">
   <title>@frogcat/ttl2jsonld</title>
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script src="../ttl2jsonld.js"></script>
   <style>
     body>div {
@@ -37,27 +36,27 @@
     <h1>@frogcat/ttl2jsonld demo</h1>
     <h2>Input turtle</h2>
     <textarea id="input"></textarea>
-    <button>convert</button>
+    <button id="convert">convert</button>
     <h2>Output JSON-LD</h2>
     <pre id="output">Click 'convert' to run</pre>
   </div>
-  <script>
-    $("#input").val(`@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+  <script type="module">
+    input.value = `@prefix foaf: <http://xmlns.com/foaf/0.1/> .
 
 <http://manu.sporny.org/about#manu> a foaf:Person;
   foaf:name "Manu Sporny";
-  foaf:homepage <http://manu.sporny.org/> .`);
+  foaf:homepage <http://manu.sporny.org/> .`;
 
-    $("button").click(function() {
+    convert.onclick = () => {
       try {
-        var t = $("#input").val();
-        var j = ttl2jsonld.parse(t);
-        $("#output").text(JSON.stringify(j, null, 2));
+        const t = input.value;
+        const j = ttl2jsonld.parse(t);
+        output.textContent = JSON.stringify(j, null, 2);
       } catch (e) {
         console.log(e);
         alert(e);
       }
-    });
+    };
   </script>
 </body>
 
